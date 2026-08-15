@@ -1,1 +1,330 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="AI PLS Dashboard — لوحة التحكم الشخصية للتعلم الذكي."
+  >
+
+  <meta
+    name="theme-color"
+    content="#070b17"
+  >
+
+  <title>AI PLS — لوحة التحكم</title>
+
+
+  <!-- =====================================================
+       FONTS
+  ====================================================== -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <!-- =====================================================
+       DASHBOARD STYLES
+  ====================================================== -->
+
+  <style>
+
+    /* =====================================================
+       01. DESIGN SYSTEM
+    ====================================================== */
+
+    :root {
+
+      --bg: #070b17;
+      --bg-soft: #0b1020;
+
+      --surface: rgba(17, 24, 39, 0.72);
+      --surface-solid: #111827;
+      --surface-light: #172033;
+
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+
+      --cyan: #22d3ee;
+
+      --text: #f8fafc;
+      --text-soft: #cbd5e1;
+      --muted: #94a3b8;
+
+      --border: rgba(148, 163, 184, 0.14);
+
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+
+      --gradient:
+        linear-gradient(
+          135deg,
+          #6366f1 0%,
+          #22d3ee 100%
+        );
+
+      --sidebar-width: 255px;
+
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 26px;
+
+      --shadow:
+        0 24px 80px rgba(0, 0, 0, 0.35);
+    }
+
+
+    /* =====================================================
+       02. RESET
+    ====================================================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    body {
+
+      min-height: 100vh;
+
+      font-family:
+        "Cairo",
+        "IBM Plex Sans Arabic",
+        sans-serif;
+
+      color: var(--text);
+
+      background:
+
+        radial-gradient(
+          circle at 85% 0%,
+          rgba(99, 102, 241, 0.12),
+          transparent 28%
+        ),
+
+        radial-gradient(
+          circle at 15% 80%,
+          rgba(34, 211, 238, 0.06),
+          transparent 25%
+        ),
+
+        var(--bg);
+
+      overflow-x: hidden;
+
+      -webkit-font-smoothing: antialiased;
+    }
+
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+
+    button {
+      border: 0;
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    /* =====================================================
+       03. APP LAYOUT
+    ====================================================== */
+
+    .app {
+
+      min-height: 100vh;
+
+      display: flex;
+    }
+
+
+    /* =====================================================
+       04. SIDEBAR
+    ====================================================== */
+
+    .sidebar {
+
+      width: var(--sidebar-width);
+
+      min-height: 100vh;
+
+      position: fixed;
+
+      top: 0;
+      right: 0;
+
+      z-index: 100;
+
+      padding: 22px 16px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      background:
+        rgba(8, 13, 28, 0.88);
+
+      border-left:
+        1px solid var(--border);
+
+      backdrop-filter:
+        blur(22px);
+
+      -webkit-backdrop-filter:
+        blur(22px);
+
+      transition:
+        transform 0.3s ease;
+    }
+
+
+    /* Brand */
+
+    .sidebar-brand {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      padding:
+        4px 8px 25px;
+
+      border-bottom:
+        1px solid var(--border);
+
+      margin-bottom: 24px;
+    }
+
+
+    .brand-icon {
+
+      width: 42px;
+      height: 42px;
+
+      display: grid;
+
+      place-items: center;
+
+      flex-shrink: 0;
+
+      border-radius: 13px;
+
+      background:
+        var(--gradient);
+
+      box-shadow:
+        0 10px 30px
+        rgba(99, 102, 241, 0.30);
+
+      font-size: 20px;
+    }
+
+
+    .brand-info strong {
+
+      display: block;
+
+      font-size: 17px;
+
+      font-weight: 800;
+    }
+
+
+    .brand-info span {
+
+      display: block;
+
+      margin-top: 1px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+    }
+
+
+    /* Navigation */
+
+    .nav-label {
+
+      padding:
+        0 10px 10px;
+
+      color: #64748b;
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      letter-spacing: 1px;
+    }
+
+
+    .sidebar-nav {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 5px;
+    }
+
+
+    .nav-item {
+
+      min-height: 46px;
+
+      padding:
+        0 13px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      border-radius: 13px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      cursor: pointer;
+
+      transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.
